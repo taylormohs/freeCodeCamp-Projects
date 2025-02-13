@@ -1,60 +1,554 @@
-
-
 * {
   scroll-behavior: smooth;
   font-family: courier new;
   cursor: default;
 }
 
+/* POKEMON  */
 
-#picture {
+#pokemon-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+#h2-pokemon {
+  text-align: center;
+  align-items: center;
+}
+#pokemon-search-input, #pokemon-search-button, #pokemon-label {
+  margin-top: 1rem;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+  margin: 0 auto;
+}
+#pokemon-hr {
+  width: 75%;
+  border: none;
+  border-top: solid 2px red;
+}
+#pokemon-search-input {
+  background-color: #f3c69d;
+  font-weight: bold;
+  border: solid red 2px;
+  color: black;
+}
+#pokemon-search-button {
+  background-color: initial;
+  background-image: linear-gradient(-180deg, #FF7E31, #E62C03);
+  border-radius: 60px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 2px 4px;
+  color: #f3c69d;
+  cursor: pointer;
+  font-family: Arial,sans-serif;
+  font-weight: bold;
+  height: 3rem;
+  width: 8rem;
+  line-height: 40px;
+  pointer-events: auto;
+  border: 0;
+  text-align: center;
+  touch-action: manipulation;
+  transition: box-shadow .2s;
+  margin: 0 auto;
+  display: flex;
+}
+#pokemon-search-button:hover {
+  box-shadow: #f3c69d 0 3px 8px;
+}
+.pokemon-output {
+  margin: 10px auto;
+  padding: 5px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  display: flex;
+}
+.pokemon-top-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 325px;
+  align-items: center;
+  justify-items: center;
+  margin: 0 auto;
+  margin-bottom: 50px;
+  padding: 10px;
+  height: 15rem;
+}
+.pokemon-bottom-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  gap: 10px;
+  background-color: #dd8a40;
+  border: #dd8a40 2px solid;
+}
+
+.name-and-id {
+  height: 28px;
+  font-size: 3rem;
+  text-transform: capitalize;
+  margin-bottom: 3rem;
+}
+.pokemon-size {
+  height: 22px;
+  font-size: 0.85rem;
+
+}
+.sprite-container {
+  margin-top: 4rem;
+  flex-grow: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  text-align: center;
+  background-color: #dd8a40;
+}
+#sprite {
+  width: 180px;
+}
+#types {
+  min-height: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 5px;
+}
+.type {
+  width: 66px;
+  padding: 5px;
+  font-size: 0.7rem;
+  text-align: center;
+  text-transform: uppercase;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  font-size: 1rem;
+  color: #000000;
+  background-color: #aeb3ff;
+  align-items: center;
+  justify-content: center;
+}
+td, th {
+  text-align: center;
+  padding: 5px;
+  align-items: center;
+  justify-content: center;
+}
+.normal {
+  background-color: #b7b7aa;
+  color: black;
+  font-weight: bold;
+}
+.fire {
+  background-color: #ff6f52;
+    color: black;
+  font-weight: bold;
+}
+.water {
+  background-color: #42a1ff;
+    color: black;
+  font-weight: bold;
+}
+.electric {
+  background-color: #fecc33;
+    color: black;
+  font-weight: bold;
+}
+.grass {
+  background-color: #78cc55;
+    color: black;
+  font-weight: bold;
+}
+.ice {
+  background-color: #66ccfe;
+    color: black;
+  font-weight: bold;
+}
+.fighting {
+  background-color: #d3887e;
+    color: black;
+  font-weight: bold;
+}
+.poison {
+  background-color: #c68bb7;
+    color: black;
+  font-weight: bold;
+}
+.ground {
+  background-color: #dfba52;
+    color: black;
+  font-weight: bold;
+}
+.flying {
+  background-color: #8899ff;
+    color: black;
+  font-weight: bold;
+}
+.psychic {
+  background-color: #ff66a3;
+    color: black;
+  font-weight: bold;
+}
+.bug {
+  background-color: #aabb23;
+    color: black;
+  font-weight: bold;
+}
+.rock {
+  background-color: #baaa66;
+    color: black;
+  font-weight: bold;
+}
+.ghost {
+  background-color: #9995d0;
+    color: black;
+  font-weight: bold;
+}
+.dragon {
+  background-color: #b59682;
+    color: black;
+  font-weight: bold;
+}
+.steel {
+  background-color: #abaabb;
+    color: black;
+  font-weight: bold;
+}
+.fairy {
+  background-color: #ed99ed;
+    color: black;
+  font-weight: bold;
+}
+
+/* PHONE NUMBER VALIDATOR */
+
+#phone-body {
+  background: #9BD1DB;
+  margin: auto;
+  text-align: center;
+  display: grid;
+}
+#phone-container {
+  background: black;
+  width: 20em;
+  height: 30em;
+  margin: auto;
+  color: white;
+  position: relative;
+  border-radius: 25px;
+}
+#phone-container #screen {
+  background: #DDDFDE;
+  margin: auto;
   width: 15em;
-  max-width: 100%;
-  height: auto;
-  border-radius: 50%;
-  margin-right: 3em;
-  margin-left: 3em;
-  left: 0;
+  height: 24em;
+  position: relative;
+  margin-top: 2em;
+
+}
+#phone-check-btn,
+#phone-clear-btn {
+  width: 7em;
+  height: 3em;
+  position: relative;
+  margin-top: 1em;
+  margin-left: 0.5em;
+  margin-right: 0.5em;
+  font-weight: bold;
+  border-radius: 115px;
+  cursor: pointer;
+}
+#phone-header {
+  position: relative;
+  height: 2em;
+  padding-top: 1em;
+  color: black;
+  padding-left: 1em;
+}
+#phone-user-input {
+  border: 0.5em solid #AFB1B1;
+  border-radius: 25px;
+  color: black;
+  position: relative;
+  width: 15em;
+  height: 3em;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+  letter-spacing: 3px;
+  font-weight: bold;
+}
+#phone-results-div {
+  color: black;
+  text-align: center;
+  margin: auto;
+  padding-top: 3em;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+}
+
+/* ROMAN NUMERAL CONVERTER */
+
+#roman-numeral-converter {
+  background-color: var(--light);
+  font-family: "Castoro Titling";
+  color: var(--teal);
+  text-align: center;
+}
+:root {
+  --teal: #7da2a9;
+  --medium: lightgrey;
+  --light: #f7f7f7;
+}
+#h1-roman {
+  letter-spacing: 0.4rem;
+  font-family: "Castoro Titling";
+  background-color: var(--light);
+  padding: 0.5em;
+}
+#roman-input-container {
+  border: none;
+  background-color: var(--light);
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  padding: 1em;
+} 
+.roman-input-container {
+  background-color: var(--light);
+  color: var(--teal); 
+}
+#h2-roman {
+  letter-spacing: 0.1rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  font-family: "Castoro Titling";
+}
+.roman-number {
+  margin: auto;
+  border: var(--teal) solid 2px;
+  background-color: var(--light);
+  width: 6em;
+  height: 1.5em;
+  border-radius: 12px;
+  font-size: 1.8rem;
+  font-weight: bold;
+  text-align: center;
+  color: var(--teal);
   display: block;
-  padding-top: 7em;
-  padding-bottom: 1em;
+  line-height: 3em;
+}
+#roman-convert-btn {
+  border: var(--teal) solid 2px;
+  color: var(--light);
+  background-color: var(--teal);
+  width: 8em;
+  height: 3.5em;
+  border-radius: 12px;
+  cursor: pointer;
+}
+.roman-output {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--light);
+  width: 16em;
+  height: 3.5em;
+  margin: auto;
+  margin-bottom: 1em;
+  margin-top: 1em;
+  border: none;
+  color: var(--teal);
+  font-size: 1.7rem;
+  font-weight: bold;
+}
+#roman-hr {
+  border: var(--teal) solid 2px;
+  margin-bottom: 1em;
+  width: 100%;
 }
 
-@media (max-width: 1200px) {
-  #picture {
-    width: 12em;
-    margin-right: 2em;
-    margin-left: 2em;
-    margin-top: 5em;
+/* CASH REGISTER */
+
+#cash-register-html,
+::before,
+::after {
+  background-color: #dad8b2;
+  color: #45431a;
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  justify-content: center;
+}
+#h2-cash {
+  margin-bottom: 0;
+  text-decoration: underline;
+}
+#cash-price,
+#cash-change,
+#cash-in-drawer {
+  font-size: 1.3rem;
+}
+#change-due {
+  font-size: 1.3em;
+}
+#cash-change:hover,
+#change-due:hover {
+  color: #d8a046;
+}
+#cash-input {
+  width: 15em;
+appearance: none;
+  background-color: #f9e79f;
+  border-radius: 40em;
+  border-style: none;
+  box-shadow: #f4d03f 0 -12px 6px inset;
+  box-sizing: border-box;
+  color: #45431a;
+  cursor: pointer;
+  display: inline-block;
+  font-family: -apple-system,sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: -.24px;
+  margin: 0 auto;
+  outline: none;
+  padding: 1rem 1.3rem;
+  quotes: auto;
+  text-align: center;
+  text-decoration: none;
+  transition: all .15s;
+  user-select: none;
+  touch-action: manipulation;
+  margin-top: 1rem;
+}
+#cash-purchase-btn {
+  width: 10em;
+  appearance: none;
+  background-color: #f4d03f;
+  border-radius: 40em;
+  border-style: none;
+  box-shadow: #f5b041 0 -12px 6px inset;
+  box-sizing: border-box;
+  color: #45431a;
+  cursor: pointer;
+  display: inline-block;
+  font-family: -apple-system,sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: -.24px;
+  margin: 0 auto;
+  outline: none;
+  padding: 1rem 1.3rem;
+  quotes: auto;
+  text-align: center;
+  text-decoration: none;
+  transition: all .15s;
+  user-select: none;
+  touch-action: manipulation;
+  margin-top: 1rem;
+}
+#cash-purchase-btn:hover,
+#cash-input:hover {
+  background-color: #FFC229;
+  box-shadow: #FF6314 0 -6px 8px inset;
+  transform: scale(1.125);
+}
+#cash-purchase-btn:active,
+#cash-input:active {
+  transform: scale(1.025);
+}
+
+/* PALINDROME CHECKER */
+
+#palindrome-html {
+  background-color: black;
+  font-family: courier serif;
+}
+#palindrome-container, #palindrome-enter-text {
+  background-color: goldenrod;
+  margin: 1em auto;
+  padding: 1px;
+  border-radius: 3px;
+  text-align: center;
+  display: grid;
+  width: 60%;
+}
+.palindrome-result {
+  background-color: goldenrod;
+  font-weight: bold;
+  padding-top: 1em;
+
+}
+#palindrome-container {
+  border: solid #EFF3F8 4px;
+  padding-top: 10px;
+}
+#h1-palindrome {
+  text-align: center;
+   /* box-shadow: -3px 5px 20px #EFF3F8; */
+   margin-left: 20%;
+   margin-right: 20%;
+   /* border: 4px #EFF3F8 solid; */
+   padding-bottom: 8px;
+   border-radius: 8px;
+   padding-top: 8px;
+   color: goldenrod;
+}
+.palindrome-explanation-container {
+   text-align: center;
+   font-size: 18px;
+   /* box-shadow: -3px 5px 20px #EFF3F8; */
+   margin-left: 10%;
+   margin-right: 10%;
+   /* border: 4px #EFF3F8 solid; */
+   border-radius: 5px;
+   padding: 4px 3px 4px 3px;
+   margin-top: 30px;
+   color: goldenrod;
+}
+
+#palindrome-text-input {
+  text-align: center;
+  margin-left: 30%;
+  margin-right: 30%;
+  background-color: white;
+  margin-top: 4px;
+}
+#palindrome-check-btn {
+  background-color: white;
+  margin-left: 40%;
+  margin-right: 40%;
+  margin-top: 1em;
+  margin-bottom: -16px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-radius: 15px;
+}
+
+/* Media Queries */
+@media screen and (min-width: 550px) {
+  .pokemon-container {
+    width: 450px;
+  }
+
+  #pokemon-search-form, .pokemon-top-container, .pokemon-bottom-container {
+    width: 95%;
+  }
+
+  .type {
+    width: 75px;
   }
 }
-
-@media (max-width: 800px) {
-  #picture {
-    width: 75%;
-    height: auto;
-    border-radius: 10px;
-    margin-right: 1.8em;
-    margin-left: 1.8em;
-    
-  }
-
-  #profile-picture {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    flex-direction: column;
-}
-}
-
-@media (max-width: 600px) {
-  #profile-picture {
-    width: 75%;
-    height: auto;
-    display: flex; 
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    flex-direction: column;
-  }

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" id="roman-numeral-converter">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, intial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Roman Numeral Converter</title>
+  </head>
+  <main id="roman-container" class="roman-container">
+    <h1 id="h1-roman">Roman Numeral Converter</h1>
+    <hr id="roman-hr"></hr>
+    <fieldset id="roman-input-container" class="roman-input-container">
+      <h2 id="h2-roman">ENTER A NUMBER</h2>
+      <form id="roman-form" class="roman-form">
+    <input id="roman-number" class="roman-number" type="number" value="" name="input-number">
+    <br>
+    <button id="roman-convert-btn" class="roman-convert-btn">
+      CONVERT
+    </button>
+    </form>
+    </fieldset>
+    <fieldset id="roman-output" class="roman-output" style="display: none;">
+      <hr id="roman-hr"></hr>
+      <br>
+      <div id="roman-output-div" class="roman-output-div bold" for="number"></div>
+    </fieldset>
+  </main>
+</html>
+<script>
+
+const inputNumber = document.getElementById("roman-number");
+const convertBtn = document.getElementById("roman-convert-btn");
+const output = document.getElementById("roman-output-div");
+const form = document.getElementById("roman-form")
+const hidden = document.getElementById("roman-output");
+
+const convertToRoman = num => {
+const ref = [
+    ['M', 1000],
+    ['CM', 900],
+    ['D', 500],
+    ['CD', 400],
+    ['C', 100],
+    ['XC', 90],
+    ['L', 50],
+    ['XL', 40],
+    ['X', 10],
+    ['IX', 9],
+    ['V', 5],
+    ['IV', 4],
+    ['I', 1]
+];
+
+//We use the forEach method to iterate through each sub-array (referred to as arr) in the ref array. 
+// arr[0] for the numeral and arr[1] for the value
+const result = [];
+  ref.forEach(function (arr) {
+    while (num >= arr[1]) {
+      result.push(arr[0]);
+      num -= arr[1];
+    }
+  });
+
+  return result.join('');
+};
+
+const isValid = (userInput) => {
+  let errorText = "";
+  if (!userInput || userInput.match(/[e.]/g) || isNaN(userInput)) {
+    errorText = "Please enter a valid number";
+  } else if (userInput < 1) {
+    errorText = "Please enter a number greater than or equal to 1";
+  } else if (userInput > 3999) {
+    errorText = "Please enter a number less than or equal to 3999";
+  } else {
+    return true;
+  }
+  output.innerText = errorText;
+  output.classList.add('alert');
+
+
+};
+
+const clearInput = () => {
+  let userInput = inputNumber.value;
+  let int = parseInt(userInput);
+  inputNumber.innerText = "";
+};
+
+
+const clickConvert = () => {
+hidden.style.display = "block";
+  
+  let userInput = inputNumber.value;
+  let int = parseInt(userInput);
+
+  if(isValid(userInput) === true) {
+    output.innerText = convertToRoman(int);
+  }
+  };
+
+//prevents form from automatically refreshing page after submitted
+form.addEventListener("submit", e => {
+  e.preventDefault();
+  clickConvert();
+  clearInput();
+});
+
+inputNumber.addEventListener('keydown', e => {
+ if (e.key === 'Enter') {
+   clickConvert(userInput);
+   clearInput();
+ }});
+</script>

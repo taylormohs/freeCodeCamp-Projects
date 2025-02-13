@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" id="palindrome-html">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+  <title>Palindrome Checker</title>
+  </head>
+  <header>
+    <h1 id="h1-palindrome">Is It a Palindrome?</h1>
+  </header>
+  <body>
+   <div id="palindrome-container">
+    <p id="palindrome-enter-text">Enter in a text to check if it's a palindrome.</p>
+    <input id="palindrome-text-input" type="text" value="" class="palindrome-input"></input>
+    <button id="palindrome-check-btn" class="palindrome-btn">Submit</button>
+    <p id="palindrome-result" class="palindrome-result hidden" ></p>
+    </div>
+
+    <div class="palindrome-explanation-container">
+    <p class="palindrome-explanation">A palindrome is a word or sentence that's spelled the same way both forward and backward, ignoring punctuation, case, and spacing.</p>
+    </div>
+
+  </body>
+</html>
+<script>
+    const textInput = document.getElementById("palindrome-text-input");
+const checkButton = document.getElementById("palindrome-check-btn");
+const palindromeResult = document.getElementById("palindrome-result");
+
+const enterPalindrome = input => {
+  const textInput = input;
+
+  if (input === "") {
+    alert("Please input a value");
+    return;
+  }
+
+palindromeResult.replaceChildren();
+
+const fixedString = input.replace(/[^A-Za-z0-9]/gi, "").toLowerCase();
+
+let resultMsg = `${textInput} ${
+  fixedString === [...fixedString].reverse().join("") ? `is` : `is not`} a palindrome`;
+
+const rTag = document.createElement("r");
+rTag.className = "palindrome-result";
+rTag.innerText = resultMsg;
+palindromeResult.appendChild(rTag);
+
+  palindromeResult.classList.remove('hidden');
+
+};
+
+checkButton.addEventListener('click', () => {
+  enterPalindrome(textInput.value);
+  textInput.value = '';
+});
+
+textInput.addEventListener('keydown', e => {
+  if (e.key === 'Enter') {
+    enterPalindrome(textInput.value);
+    textInput.value = '';
+  }
+});
+</script> 

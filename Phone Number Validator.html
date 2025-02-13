@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang ="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="device=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Phone Number Validator</title>
+  </head>
+  <body id="phone-body">
+    <h1>Telephone Number Validator</h1>
+    <div name="phone-container" id="phone-container">
+      <div name="screen" id="screen">
+        <h2 #phone-header>Enter Phone Number:</h2>
+        <div name="input=box" id="input-box">
+          <input name="user-input" id="phone-user-input">
+          </div>
+          <div name="results-div" id="phone-results-div">
+        </div>
+      </div>
+      <button name="check-btn" id="phone-check-btn">CHECK</button>
+        <button name="clear-btn" id="phone-clear-btn">CLEAR</button>
+    </div>
+  </body>
+  </html>
+  <script>
+    const userInput = document.getElementById("phone-user-input");
+const checkBtn = document.getElementById("phone-check-btn");
+const clearBtn = document.getElementById("phone-clear-btn");
+const resultDiv = document.getElementById("phone-results-div");
+
+const validateNumber = (input) => {
+  const numberFormatRegex = /^(1\s?)?(\d{3}[\s\-]?)\d{3}[\s\-]?\d{4}$/;
+  const parenthesisRegex = /^(1\s?)?(\(\d{3}\)[\s\-]?)\d{3}[\s\-]?\d{4}$/;
+
+  if (numberFormatRegex.test(input) || parenthesisRegex.test(input) === true) {
+    return true;
+  }
+}
+
+const check = () => {
+  checkBtn.addEventListener("click", () => {
+    const userInputValue = userInput.value.trim();
+
+    if (userInputValue === "") {
+      alert("Please provide a phone number");
+    } else {
+      if (validateNumber(userInputValue)) {
+        resultDiv.innerHTML = `Valid US number:<br>${userInputValue}`;
+      } else {
+        resultDiv.innerHTML = `Invalid US number:<br>${userInputValue}`;
+      }
+    }
+  });
+}
+
+const clearForm = () => {
+  userInput.value = "";  
+  resultDiv.textContent = "";
+};
+
+
+const clear = () => {
+  clearBtn.addEventListener("click", clearForm);
+}
+
+check();
+clear();
+  </script>

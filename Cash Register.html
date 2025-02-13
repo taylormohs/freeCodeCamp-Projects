@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" id="cash-register-html">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="styles.css">
+        <title>Cash Register Project</title>
+    </head>
+    <body>
+        <main id="cash-container">
+            <h2 id="h2-cash">How Much Change Are You Owed?</h2> 
+            <h2 id="h2-cash">📠</h2>
+            <input autocomplete="off" type="number" id="cash-input" placeholder="Enter Cash Here">
+            <button id="cash-purchase-btn">Purchase</button>
+            <p id="cash-price"></p>
+            <p id="cash-change"></p><br>
+            <div id="change-due"></div>
+            <div id="cash-in-drawer"></div>
+        </main>
+        <script>
+
+let cash = document.getElementById("cash-input");
+let displayChangeDue = document.getElementById("change-due");
+let purchaseBtn = document.getElementById("cash-purchase-btn");
+let displayCid = document.getElementById("cash-in-drawer");
+
+let price = (Math.random() * 100).toFixed(2);
+
+let cid = [
+  ["PENNY", 1.01],
+  ["NICKEL", 2.05],
+  ["DIME", 3.1],
+  ["QUARTER", 4.25],
+  ["ONE", 90],
+  ["FIVE", 55],
+  ["TEN", 20],
+  ["TWENTY", 60],
+  ["ONE HUNDRED", 100]
+];
+
+document.getElementById("cash-price").innerHTML = `<b>Price:</b> ${price}`;
+
+const checkRegister = () => {
+  let cashInput = parseFloat(cash.value);
+  let change = Number((cashInput - price).toFixed(2));
+  let totalCid = Number(cid.reduce((total, sum) => total + sum[1], 0).toFixed(2));
+
+  document.getElementById("cash-change").innerHTML = `<b>Change:</b> ${change}`;
+
+  if (cashInput < price) {
+    alert("Customer does not have enough money to purchase the item");
+    displayChangeDue.innerText = "Customer may not purchase the item";
+    return;
+  } else if (cashInput === price) {
+    displayChangeDue.innerText = "No change due - customer paid with exact cash";
+    return;
+  } else if (cash.value === "") {
+    return;
+  }
+
+  if (change > totalCid) {
+    displayChangeDue.innerText = "Status: INSUFFICIENT DRAWER FUNDS";
+    return;
+  }
+
+  const denominations = [100, 20, 10, 5, 1, 0.25, 0.10, 0.05, 0.01];
+  const denominationNames = ["ONE HUNDRED", "TWENTY", "TEN", "FIVE", "ONE", "QUARTER", "DIME", "NICKEL", "PENNY"];
+  let changeArr = [];
+  let cidCopy = [...cid];
+
+  for (let i = 0; i < denominations.length; i++) {
+    let totalDenom = 0;
+    while (change >= denominations[i] && cidCopy[cidCopy.length - 1 - i][1] > 0) {
+      cidCopy[cidCopy.length - 1 - i][1] = Number((cidCopy[cidCopy.length - 1 - i][1] - denominations[i]).toFixed(2));
+      change = Number((change - denominations[i]).toFixed(2));
+      totalDenom += denominations[i];
+    }
+
+    if (totalDenom > 0) {
+      changeArr.push([denominationNames[i], totalDenom]);
+    }
+  }
+
+  if (change > 0) {
+    displayChangeDue.innerText = "Status: INSUFFICIENT DRAWER FUNDS";
+    return;
+  }
+
+  // let remainingCid = cidCopy.reduce((total, sum) => total + sum[1], 0);
+  // if (remainingCid === 0) {
+  //   displayChangeDue.innerHTML = "Status: CLOSED " + changeArr.map(cash => `${cash[0]}: $${cash[1].toFixed(2)}`).join(" ");
+  //   cid = cid.map(denom => [denom[0], 0]);
+  // } else {
+  //   displayChangeDue.innerHTML = "Status: OPEN<br> <h4>Change Due:</h4>" + changeArr.map(cash => `${cash[0]}: $${cash[1]} <br>`).join(" ");
+  //   cid = cidCopy;
+  // }
+
+  displayCashInDrawer();
+}
+
+const displayCashInDrawer = () => {
+  displayCid.innerHTML = "<h4>Cash in Drawer:</h4>" + cid.map(cash => `${cash[0]}: $${cash[1]} <br>`).join("");
+}
+
+window.onload = displayCashInDrawer;
+
+function refreshPage() {
+  window.location.reload();
+}
+
+let isRegisterOpen = false;
+
+purchaseBtn.addEventListener('click', () => {
+isRegisterOpen = !isRegisterOpen;
+    if (isRegisterOpen) {
+      purchaseBtn.innerText = 'Clear';
+      checkRegister();
+    } if (!isRegisterOpen) {
+      purchaseBtn.innerText = 'Purchase';
+      refreshPage();
+    }
+    });
+
+cash.addEventListener("keydown", e => {
+  if (e.key === "Enter") {
+    isRegisterOpen = !isRegisterOpen;
+    if (isRegisterOpen) {
+      purchaseBtn.innerText = 'Reset';
+      checkRegister();
+    } if (!isRegisterOpen) {
+      purchaseBtn.innerText = 'Purchase';
+      refreshPage();
+    }
+  }});
+  
+        </script>
+    </body>
+</html>
